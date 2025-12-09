@@ -1,13 +1,9 @@
-import express from 'express';
-const app = express();
-const port = 3000;
+import app from "./app.js";
+// será necessário fazer ajuste para conectar com o banco de dados.
 
-app.use(express());
+const PORT = 3000;
 
-app.get("/", (req, res)=>{
-    res.send("bem vindo");
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`Acesse: http://localhost:${PORT}`);
 });
-
-app.listen(port, ()=> {
-    console.log(`server rodando em http://localhost:${port}`);
-})
