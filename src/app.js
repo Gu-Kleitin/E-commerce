@@ -19,6 +19,13 @@ app.engine(
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "..", "views", "layouts"),
     partialsDir: path.join(__dirname, "..", "views", "partials"),
+    helpers: {
+      // O helper "eq" é a sua função 'equalsHelper'
+      eq: (arg1, arg2) => {
+        return arg1 === arg2;
+      },
+      // Você pode adicionar outros helpers aqui, como o 'formatPrice' no futuro.
+    },
   })
 );
 

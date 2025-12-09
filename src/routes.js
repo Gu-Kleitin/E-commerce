@@ -8,7 +8,7 @@ const mockProducts = [
     101, //id
     "Notebook Gamer ZIZZ", // name
     "Processador i7, 16GB RAM, SSD 512GB", //discription
-    "/images/notebook.jpg", // image
+    "/images/notebook.png", // image
     5500.0, //price
     5, //stock
     true //inStock?
@@ -17,7 +17,7 @@ const mockProducts = [
     102,
     "Mouse Óptico Z",
     "Mouse ergonômico com 6 botões programáveis",
-    "/images/mouse.jpg",
+    "/images/mouse.png",
     150.0,
     25,
     true
@@ -26,7 +26,7 @@ const mockProducts = [
     103,
     "Teclado Mecânico",
     "Teclado RGB, switch blue",
-    "/images/teclado.jpg",
+    "/images/teclado.png",
     300.0,
     0,
     false // Fora de exposição
@@ -44,10 +44,41 @@ router.get("/seller/products", (req, res) => {
 
 // Rota Home Page (cliente)
 router.get("/", (req, res) => {
+  // 1. Filtra a lista mockada: pega apenas os produtos onde emExposicao é true
+  const produtosVisiveis = mockProducts.filter((p) => p.emExposicao === true);
+
   res.render("home", {
     title: "Página Inicial E-commerce",
     cartItemCount: 2,
+    produtosVisiveis: produtosVisiveis, // Passa a lista filtrada para o template
   });
+});
+
+// Rota Controle de estoque (vendedor)
+router.post("/seller/products/toggle-exposure", (req, res) => {
+  // req.body é populado graças ao middleware express.urlencoded() no app.js
+  const { productId, action } = req.body;
+
+  // Converte o ID para número (garantindo que seja um número para a comparação)
+  const id = parseInt(productId);
+
+  // 1. Encontra o produto no nosso mock de dados
+  const produto = mockProducts.find((p) => p.id === id);
+
+  if (produto) {
+    // 2. Atualiza o status com base na ação enviada pelo formulário
+    if (action === "expor") {
+      produto.emExposicao = true;
+      console.log(`Produto ID ${id} exposto.`);
+    } else if (action === "retirar") {
+      // Este é o cerne do Requisito 5
+      produto.emExposicao = false;
+      console.log(`Produto ID ${id} retirado de exposição.`);
+    }
+  }
+
+  // 3. Redireciona o usuário de volta para a página GET (Post-Redirect-Get Pattern)
+  res.redirect("/seller/products");
 });
 
 export default router;
