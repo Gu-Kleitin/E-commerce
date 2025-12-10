@@ -143,3 +143,89 @@ body {
   background-color: var(--success-color);
   color: white;
 }
+
+.ordenar-form {
+  margin-bottom: 20px;
+}
+
+/* Container principal dos filtros (product-grid) */
+.product-grid {
+    
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    align-items: flex-end; 
+    margin-bottom: 30px;
+    flex-direction: row;
+    align-items: flex-start;
+}
+/*Busca (search-box)*/
+.search-box {
+    display: flex;
+    width: 100%;
+    max-width: 400px; 
+}
+
+.search-box input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px; 
+    flex-grow: 1;
+    font-size: 1em;
+}
+
+.search-box button {
+    padding: 10px 15px;
+    background-color: #232f3e; 
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-box button:hover {
+    background-color:  var(--primary-color);
+}
+
+/*filtros-form*/
+.filtros-form {
+    display: flex;
+    gap: 15px; 
+    align-items: flex-end; 
+}
+.filters-bar {
+    
+    width: 100%; 
+}
+.filtros-form label {
+    font-weight: bold;
+    color: #333;
+    display: block; 
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.filtros-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    min-width: 150px; 
+    font-size: 1em;
+}
+
+.filtros-form button[type="submit"] {
+ 
+    padding: 9px 15px;
+    background-color: #232f3e;  
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filtros-form button[type="submit"]:hover {
+    background-color:  var(--primary-color);
+}

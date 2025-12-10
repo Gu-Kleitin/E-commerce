@@ -2,6 +2,13 @@ import express from "express";
 const router = express.Router();
 import { ProductModel } from "./seller/models/product-models.js";
 
+// Mock de Categorias
+const mockCategories = [
+    { id: "eletro", name: "Eletrônicos" },
+    { id: "computadores", name: "Computadores e Notebooks" },
+    { id: "gamer", name: "Produtos Gamer" }
+];
+
 // Mock de dados para simular a listagem do vendedor (para testes iniciais)
 const mockProducts = [
   new ProductModel(
@@ -11,7 +18,8 @@ const mockProducts = [
     "/images/notebook.png", // image
     5500.0, //price
     5, //stock
-    true //inStock?
+    true, //inStock?
+    ["eletro", "gamer","computadores"]
   ),
   new ProductModel(
     102,
@@ -20,7 +28,8 @@ const mockProducts = [
     "/images/mouse.png",
     150.0,
     25,
-    true
+    true,
+    ["eletro"]
   ),
   new ProductModel(
     103,
@@ -29,7 +38,8 @@ const mockProducts = [
     "/images/teclado.png",
     300.0,
     0,
-    false // Fora de exposição
+    false, // Fora de exposição
+    ["eletro", "gamer"]
   ),
 ];
 
@@ -44,13 +54,31 @@ router.get("/seller/products", (req, res) => {
 
 // Rota Home Page (cliente)
 router.get("/", (req, res) => {
+  const ordem = req.query.ordenar; // pegar ordenar=preco-asc
+  const categoriaSelecionada = req.query.categoria; // Pega o filtro de categoria
   // 1. Filtra a lista mockada: pega apenas os produtos onde emExposicao é true
-  const produtosVisiveis = mockProducts.filter((p) => p.emExposicao === true);
+  let produtosVisiveis = mockProducts.filter((p) => p.emExposicao === true);
+
+  if (ordem === "preco-asc") {
+    produtosVisiveis.sort((a, b) => a.price - b.price);
+  }
+  if (ordem === "preco-desc") {
+     produtosVisiveis.sort((a, b) => b.price - a.price); // 56
+  }
+
+  if (categoriaSelecionada) {
+    produtosVisiveis = produtosVisiveis.filter(
+        (p) => p.category.includes(categoriaSelecionada)
+    );
+  }
 
   res.render("home", {
     title: "Página Inicial E-commerce",
     cartItemCount: 2,
     produtosVisiveis: produtosVisiveis, // Passa a lista filtrada para o template
+    ordemSelecionada: ordem,
+    categorias: mockCategories, //Passa a lista de categorias
+    categoriaSelecionada: categoriaSelecionada, //Mantém a opção selecionada
   });
 });
 
@@ -79,6 +107,23 @@ router.post("/seller/products/toggle-exposure", (req, res) => {
 
   // 3. Redireciona o usuário de volta para a página GET (Post-Redirect-Get Pattern)
   res.redirect("/seller/products");
+});
+
+// Pesquisa de produtos
+router.get("/search", (req, res) => {
+  const termo = req.query.q?.toLowerCase() || "";
+
+  // Filtra produtos cujo nome ou descrição contenham o termo
+  const resultados = mockProducts.filter((p) =>
+    p.name.toLowerCase().includes(termo) ||
+    p.description.toLowerCase().includes(termo)
+  );
+
+  res.render("search-results", {
+    title: "Resultado da Pesquisa",
+    termo: req.query.q,
+    resultados,
+  });
 });
 
 export default router;

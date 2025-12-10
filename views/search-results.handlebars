@@ -1,0 +1,24 @@
+<h1>Resultados para: "{{termo}}"</h1>
+
+{{#if resultados.length}}
+  <div class="product-grid">
+    {{#each resultados}}
+      <div class="product-card">
+        <img src="{{this.photo}}" alt="{{this.name}}" />
+        <h2>{{this.name}}</h2>
+        <p>{{this.description}}</p>
+        <p class="price">R$ {{this.price}}</p>
+        {{#if this.emExposicao}}
+            <button class="button-primary">Comprar</button>
+        {{else}}
+            <button class="button-disabled" disabled>Indisponível</button>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>Nenhum produto encontrado para "{{termo}}".</p>
+{{/if}}
+
+<a href="/">Voltar para a página inicial</a>

@@ -1,6 +1,37 @@
 <h1>🛒 Produtos em Destaque</h1>
 
 <div class="product-grid">
+  <form action="/search" method="get" class="search-box">
+    <input type="text" name="q" placeholder="Buscar produtos..." required />
+    <button type="submit">Buscar</button>
+  </form>
+  
+  <div class="filters-bar">
+    <form method="GET" action="/" class="filtros-form">
+      <label for="categoria">Filtrar por Categoria:</label>
+      <select name="categoria" id="categoria">
+        <option value="">Todas as Categorias</option>
+        {{#each categorias}}
+          <option 
+              value="{{this.id}}" 
+              {{#if (eq ../categoriaSelecionada this.id)}}selected{{/if}}
+          >
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+
+      <label for="ordenar">Ordenar por:</label>
+      <select name="ordenar" id="ordenar">
+        <option value="">Padrão (Sem Ordem)</option>
+        <option value="preco-asc" {{#if (eq ordemSelecionada "preco-asc")}}selected{{/if}}>Menor preço</option>
+        <option value="preco-desc" {{#if (eq ordemSelecionada "preco-desc")}}selected{{/if}}>Maior preço</option>
+      </select>
+      
+      <button type="submit">Aplicar Filtros</button>
+      </form>
+    </div>
+
   {{#each produtosVisiveis}}
     <div class="product-card">
       <img src="{{this.photo}}" alt="{{this.name}}" />
