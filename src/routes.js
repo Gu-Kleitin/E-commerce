@@ -2,6 +2,14 @@ import express from "express";
 const router = express.Router();
 import { ProductModel } from "./seller/models/product-models.js";
 
+import mysql from 'mysql2'
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'ecommerce'
+});
+
 // Mock de dados para simular a listagem do vendedor (para testes iniciais)
 const mockProducts = [
   new ProductModel(
@@ -92,12 +100,68 @@ router.get("/login", (req, res) => {
     title: "Login",
   });
 })
+router.post("/login", (req, res) =>{
+   const { email, senha } = req.body;
+
+    const sql = `
+        SELECT * FROM usuario 
+        WHERE email = ? AND senha_hash = ?
+    `;
+
+    db.query(sql, [email, senha], (err, results) => {
+        if (err) {
+            console.error("Erro ao consultar:", err);
+            return res.send("Erro no servidor!");
+        }
+
+        if (results.length === 0) {
+            return res.send(`
+                <script>
+                    alert("Email ou senha incorretos!");
+                    window.location.href = "/login";
+                </script>
+            `);
+        }
+
+        const usuario = results[0];
+
+        res.send(`
+            <script>
+                alert("Bem-vindo, ${usuario.nome}!");
+                window.location.href = "/";
+            </script>
+        `);
+    });
+})
 
 router.get("/register", (req, res) => {
   res.render("register", {
     title: "Cadastro_usuario",
   });
+});
+router.post("/register",(req,res) =>{
+    const { nome, email, senha, vendedor } = req.body;
+
+  const sql = `
+    INSERT INTO usuario (nome, email, senha_hash, vendedor)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  db.query(sql, [nome, email, senha, vendedor], (err, result) => {
+    if (err) {
+      console.log("Erro ao inserir:", err);
+      return res.send("Erro ao cadastrar!");
+    }
+    res.send(`
+      <script>
+          alert("Cadastrado com sucesso!");
+          window.location.href = "/login"; 
+      </script>
+`   );
+  });
 })
+
+
 
 
 export default router;
