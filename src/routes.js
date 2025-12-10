@@ -45,6 +45,7 @@ const mockProducts = [
 router.get("/seller/products", (req, res) => {
   res.render("seller-products", {
     title: "Gestão de Produtos",
+    usuario: req.session.usuario,
     cartItemCount: 2,
     produtos: mockProducts,
   });
@@ -57,6 +58,7 @@ router.get("/", (req, res) => {
 
   res.render("home", {
     title: "Página Inicial E-commerce",
+    usuario: req.session.usuario,
     cartItemCount: 2,
     produtosVisiveis: produtosVisiveis, // Passa a lista filtrada para o template
   });
@@ -90,8 +92,17 @@ router.post("/seller/products/toggle-exposure", (req, res) => {
 });
 
 router.get("/account", (req, res) => {
+  if (!req.session.usuario) {
+        return res.send(`
+            <script>
+                alert("Você precisa estar logado!");
+                window.location.href = "/login";
+            </script>
+        `);
+  }
   res.render("account", {
     title: "Conta",
+    usuario: req.session.usuario,
   });
 });
 
@@ -124,6 +135,7 @@ router.post("/login", (req, res) =>{
         }
 
         const usuario = results[0];
+        req.session.usuario = usuario;
 
         res.send(`
             <script>
@@ -160,8 +172,15 @@ router.post("/register",(req,res) =>{
 `   );
   });
 })
-
-
-
+router.post("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.send(`
+            <script>
+                alert("Você saiu da sua conta!");
+                window.location.href = "/";
+            </script>
+        `);
+    });
+});
 
 export default router;
