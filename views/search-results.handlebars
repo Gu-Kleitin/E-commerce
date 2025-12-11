@@ -1,0 +1,27 @@
+<h1>Resultados para: "{{termo}}"</h1>
+
+{{#if resultados.length}}
+  <div class="product-grid">
+    {{#each resultados}}
+      <div class="product-card">
+        <img src="{{this.foto_url}}" alt="{{this.nome}}" />
+        <h2>{{this.nome}}</h2>
+        <p>{{this.description}}</p>
+        <p class="price">R$ {{this.preco}}</p>
+        {{#if this.emExposicao}}
+            <form method="POST" action="/cart/add">
+        <input type="hidden" name="productId" value="{{this.id}}">
+        <button class="button-primary" type="submit">Adicionar ao Carrinho</button>
+      </form>
+        {{else}}
+            <button class="button-disabled" disabled>Indisponível</button>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>Nenhum produto encontrado para "{{termo}}".</p>
+{{/if}}
+
+<a href="/">Voltar para a página inicial</a>

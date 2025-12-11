@@ -1,0 +1,32 @@
+<h1>Minha Conta</h1>
+
+<div class="account-info">
+    <h2>Bem-vindo(a), {{usuario.nome}}!</h2>
+    <p><strong>Email:</strong> {{usuario.email}}</p>
+    <p><strong>Tipo de Usuário:</strong> 
+        {{#if usuario.vendedor}}
+            Vendedor
+        {{else}}
+            Cliente
+        {{/if}}
+    </p>
+</div>
+
+{{#if usuario.vendedor}}
+    <div class="seller-options">
+        <h3>Opções de Vendedor</h3>
+        <a href="/seller/products" class="button-primary">Gerenciar Produtos</a>
+        <p>Aqui você pode ver e editar seus produtos, estoque e exposição.</p>
+    </div>
+{{else}}
+    <div class="client-options">
+        <h3>Opções de Cliente</h3>
+        <a href="/cart" class="button-primary">Ver Carrinho</a>
+        <a href="/orders" class="button-secondary">Meus Pedidos</a>
+        <p>Aqui você pode acompanhar seus pedidos e gerenciar seu carrinho.</p>
+    </div>
+{{/if}}
+
+<form action="/logout" method="post">
+    <button type="submit" class="button-danger">Sair da Conta</button>
+</form>

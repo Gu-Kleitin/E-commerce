@@ -1,0 +1,28 @@
+<h1>Meus Pedidos</h1>
+
+{{#if pedidos}}
+    <table class="products-table">
+        <thead>
+            <tr>
+                <th>ID do Pedido</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each pedidos}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.data_pedido}}</td>
+                <td>R$ {{this.total}}</td>
+                <td><a href="/orders/{{this.id}}" class="button-secondary">Ver Detalhes</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>Você ainda não fez nenhum pedido.</p>
+{{/if}}
+
+<a href="/account" class="button-secondary">Voltar para Minha Conta</a>

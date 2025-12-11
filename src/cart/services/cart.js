@@ -1,19 +1,21 @@
 // o que meu carrinho faz?
 //Casos de uso
 //✅-> adicionar itens no carrinho
-async function addItem(userCart, itemName) {
+function addItem(userCart, itemName) {
   userCart.push(itemName);
 }
 
 //✅-> Calcular total
-async function calculateTotal(userCart) {
-  console.log("\nTotal do carrinho é: ");
-  const result = userCart.reduce((total, item) => total + item.subtotal(), 0);
-  console.log(`🛍️ Total: ${result}`);
+function calculateTotal(userCart) {
+    if (!userCart || userCart.length === 0) {
+    return "0.00";
+  }
+  const result = userCart.reduce((total, item) => total + (item.price * item.qntd), 0);
+  return result.toFixed(2);
 }
 
 //✅-> Excluir itens do carrinho
-async function deleteItem(userCart, itemName) {
+function deleteItem(userCart, itemName) {
   const index = userCart.findIndex((item) => item.itemName === itemName);
 
   if (index !== -1) {
@@ -22,7 +24,7 @@ async function deleteItem(userCart, itemName) {
 }
 
 //✅ -> Remover item - diminui item
-async function removeItem(userCart, item) {
+function removeItem(userCart, item) {
   const indexFound = userCart.findIndex(
     (product) => product.itemName === item.itemName
   );
@@ -43,13 +45,13 @@ async function removeItem(userCart, item) {
 }
 
 //✅-> Mostrar os itens do carrinho
-async function displayCart(userCart) {
+function displayCart(userCart) {
   console.log("\nSeu carrinho: ");
   userCart.forEach((item, index) => {
     console.log(
       `${index + 1}. ${item.itemName} - R$ ${item.price} |Qntd: ${
         item.qntd
-      } | Subtotal = ${item.subtotal()}`
+      } | Subtotal = ${(item.price * item.qntd).toFixed(2)}`
     );
   });
 }

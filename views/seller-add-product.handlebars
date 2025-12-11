@@ -1,0 +1,37 @@
+<h1>Adicionar Novo Produto</h1>
+
+<form action="/seller/products/add" method="POST" class="form-default">
+    <div class="form-group">
+        <label for="nome">Nome do Produto:</label>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+
+    <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="preco">Preço (R$):</label>
+        <input type="number" id="preco" name="preco" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+        <label for="foto_url">URL da Foto:</label>
+        <input type="text" id="foto_url" name="foto_url" required>
+    </div>
+
+    <div class="form-group">
+        <label>Categorias (Selecione uma ou mais):</label>
+        <div class="checkbox-group">
+            {{#each categorias}}
+                <label>
+                    <input type="checkbox" name="categorias" value="{{this.id}}"> {{this.nome}}
+                </label>
+            {{/each}}
+        </div>
+    </div>
+
+    <button type="submit" class="button-primary">Cadastrar Produto</button>
+    <a href="/seller/products" class="button-secondary">Cancelar</a>
+</form>

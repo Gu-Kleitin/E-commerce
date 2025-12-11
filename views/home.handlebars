@@ -1,13 +1,47 @@
 <h1>🛒 Produtos em Destaque</h1>
 
+  <form action="/search" method="get" class="search-box">
+    <input type="text" name="q" placeholder="Buscar produtos..." required />
+    <button type="submit">Buscar</button>
+  </form>
+  
+  <div class="filters-bar">
+    <form method="GET" action="/" class="filtros-form">
+      <label for="categoria">Filtrar por Categoria:</label>
+      <select name="categoria" id="categoria">
+        <option value="">Todas as Categorias</option>
+        {{#each categorias}}
+          <option 
+              value="{{this.id}}" 
+              {{#if (eq categoriaSelecionada this.id)}}selected{{/if}}
+          >
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+
+      <label for="ordenar">Ordenar por:</label>
+      <select name="ordenar" id="ordenar">
+        <option value="">Padrão (Sem Ordem)</option>
+        <option value="preco-asc" {{#if (eq ordemSelecionada "preco-asc")}}selected{{/if}}>Menor preço</option>
+        <option value="preco-desc" {{#if (eq ordemSelecionada "preco-desc")}}selected{{/if}}>Maior preço</option>
+      </select>
+      
+      <button type="submit">Aplicar Filtros</button>
+      </form>
+    </div>
+
 <div class="product-grid">
   {{#each produtosVisiveis}}
     <div class="product-card">
-      <img src="{{this.photo}}" alt="{{this.name}}" />
-      <h2>{{this.name}}</h2>
+      <img src="{{this.foto_url}}" alt="{{this.nome}}" />
+      <h2>{{this.nome}}</h2>
       <p>{{this.description}}</p>
-      <p class="price">R$ {{this.price}}</p>
-      <button class="button-primary">Comprar</button>
+      <p class="price">R$ {{this.preco}}</p>
+      <form method="POST" action="/cart/add">
+        <input type="hidden" name="productId" value="{{this.id}}">
+        <button class="button-primary" type="submit">Adicionar ao Carrinho</button>
+      </form>
     </div>
   {{/each}}
 

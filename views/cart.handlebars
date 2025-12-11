@@ -1,0 +1,50 @@
+<h1>Seu Carrinho de Compras</h1>
+
+{{#if cart}}
+    <table class="products-table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço Unitário</th>
+                <th>Quantidade</th>
+                <th>Subtotal</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each cart}}
+            <tr>
+                <td>{{this.itemName}}</td>
+                <td>R$ {{this.price}}</td>
+                <td>
+                    <form method="POST" action="/cart/update" style="display: inline;">
+                        <input type="hidden" name="itemName" value="{{this.itemName}}">
+                        <input type="hidden" name="action" value="decrease">
+                        <button type="submit" class="button-secondary">-</button>
+                    </form>
+                    {{this.qntd}}
+                    <form method="POST" action="/cart/update" style="display: inline;">
+                        <input type="hidden" name="itemName" value="{{this.itemName}}">
+                        <input type="hidden" name="action" value="increase">
+                        <button type="submit" class="button-secondary">+</button>
+                    </form>
+                </td>
+                <td>R$ {{this.subtotal}}</td>
+                <td>
+                    <form method="POST" action="/cart/remove" style="display: inline;">
+                        <input type="hidden" name="itemName" value="{{this.itemName}}">
+                        <button type="submit" class="button-danger">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <h2>Total do Carrinho: R$ {{total}}</h2>
+        <a href="/checkout" class="button-primary">Finalizar Compra</a>
+    </div>
+{{else}}
+    <p>Seu carrinho está vazio.</p>
+{{/if}}

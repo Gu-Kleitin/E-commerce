@@ -4,7 +4,7 @@
     produtos.</p>
 
   <div class="action-bar">
-    <a href="/seller/products/new" class="button-primary">
+    <a href="/seller/products/add" class="button-primary">
       + Novo Produto
     </a>
   </div>
@@ -26,6 +26,14 @@
           <td>{{this.id}}</td>
           <td>{{this.name}}</td>
           <td>R$ {{this.price}}</td>
+          <td>
+            <form action="/seller/products/stock" method="POST" style="display:inline;">
+              <input type="hidden" name="productId" value="{{this.id}}" />
+              <input type="number" name="quantidade" min="1" required style="width: 50px;">
+              <button type="submit" name="action" value="abastecimento" class="button-success">Abastecer</button>
+              <button type="submit" name="action" value="retirada" class="button-danger">Retirar</button>
+            </form>
+          </td>
 
           <td>
             {{#if (eq this.estoque 0)}}
