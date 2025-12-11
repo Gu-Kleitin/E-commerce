@@ -1,0 +1,72 @@
+<div class="seller-dashboard">
+  <h1>Gestão de Produtos</h1>
+  <p>Aqui você pode ver, editar e gerenciar o estoque e a exposição dos seus
+    produtos.</p>
+
+  <div class="action-bar">
+    <a href="/seller/products/new" class="button-primary">
+      + Novo Produto
+    </a>
+  </div>
+
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Status Exposição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each produtos}}
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.name}}</td>
+          <td>R$ {{this.price}}</td>
+
+          <td>
+            {{#if (eq this.estoque 0)}}
+              <span class="stock-zero">ESGOTADO</span>
+            {{else}}
+              {{this.estoque}}
+            {{/if}}
+          </td>
+
+          <td>
+            {{#if this.emExposicao}}
+              <span class="status-active">✅ Em Exposição</span>
+            {{else}}
+              <span class="status-inactive">❌ Retirado</span>
+            {{/if}}
+          </td>
+
+          <td class="action-buttons">
+            <a
+              href="/seller/products/edit/{{this.id}}"
+              class="button-secondary"
+            >Editar</a>
+
+            <form
+              action="/seller/products/toggle-exposure"
+              method="POST"
+              style="display:inline;"
+            >
+              <input type="hidden" name="productId" value="{{this.id}}" />
+
+              {{#if this.emExposicao}}
+                <input type="hidden" name="action" value="retirar" />
+                <button type="submit" class="button-danger">Retirar</button>
+              {{else}}
+                <input type="hidden" name="action" value="expor" />
+                <button type="submit" class="button-success">Expor</button>
+              {{/if}}
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,28 @@
+<class>
+    <h1>Register</h1>
+    <p>Preencha os campos abaixo com seus dados</p>
+    <form action="/register" method="POST">
+        <label for="Nome"> Nome</label>
+        <input id="Nome" type="text" name="nome" class="form-control">
+
+        <label for="email"> Usuário (seu e-mail)</label>
+        <input id="email" type="text" name="email" class="form-control">
+
+        <label for="senha"> Senha</label>
+        <input id="senha" type="password" name="senha" class="form-control">
+
+        <div class="form-checkbox">
+            <p>Vendedor?</p>
+            <label>
+                <input type="radio" name="vendedor" value=1>
+                Sim
+            </label>
+
+            <label>
+                <input type="radio" name="vendedor" value=0 checked>
+                Não 
+            </label>
+        </div>
+
+        <button id="entrar" type="submit" name="entrar" class="button-submit">Entrar</button>
+</class>

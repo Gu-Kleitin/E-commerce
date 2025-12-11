@@ -1,0 +1,222 @@
+/* public/css/style.css */
+
+/* --- Variáveis e Reset Básico (Amazon-like) --- */
+:root {
+  --primary-color: #ff9900; /* Laranja da Amazon */
+  --secondary-color: #232f3e; /* Azul Escuro */
+  --text-color: #111;
+  --light-gray: #f0f0f0;
+  --border-color: #ddd;
+  --success-color: #4caf50; /* Verde */
+  --danger-color: #d32f2f; /* Vermelho */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-gray);
+  color: var(--text-color);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* --- Navbar (Inspirado no Header da Amazon) --- */
+.navbar {
+  background-color: var(--secondary-color);
+  padding: 10px 0;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.nav-links li {
+  display: inline;
+  margin-left: 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--primary-color);
+}
+
+/* --- Dashboard do Vendedor e Tabela --- */
+.seller-dashboard h1 {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 5px;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.products-table th,
+.products-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.products-table th {
+  background-color: var(--light-gray);
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+/* --- Status e Ações --- */
+.status-active {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+.status-inactive,
+.stock-zero {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.action-bar {
+  margin-bottom: 15px;
+}
+
+.action-buttons button,
+.action-buttons a,
+.action-bar a {
+  padding: 8px 12px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.button-secondary {
+  background-color: #ccc;
+  color: var(--text-color);
+}
+
+.button-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.button-success {
+  background-color: var(--success-color);
+  color: white;
+}
+.form-card {
+background: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+max-width: 500px;
+margin: 30px auto;
+}
+
+
+.form-card h2 {
+color: var(--secondary-color);
+border-bottom: 2px solid var(--primary-color);
+padding-bottom: 5px;
+margin-bottom: 15px;
+}
+
+
+.form-control {
+width: 100%;
+padding: 10px 0px;
+border: 1px solid var(--border-color);
+border-radius: 5px;
+font-size: 1em;
+margin-top: 5px;
+margin-bottom: 15px;
+padding-right: 500;
+}
+
+
+.form-control:focus {
+outline: none;
+border-color: var(--primary-color);
+box-shadow: 0 0 4px rgba(255, 153, 0, 0.5);
+}
+
+
+.form-checkbox {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 0.95em;
+margin-bottom: 15px;
+}
+
+
+.button-submit {
+background-color: var(--primary-color);
+color: var(--text-color);
+padding: 10px 15px;
+border-radius: 5px;
+border: none;
+cursor: pointer;
+width: 100%;
+font-size: 1em;
+font-weight: bold;
+}
+
+
+.button-submit:hover {
+background-color: #e68a00;
+}
+
+.button-danger{
+  background-color: red;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  font-weight: bold;
+}
+.button-danger:hover {
+background-color: #c70707;
+}

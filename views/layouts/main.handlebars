@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="/css/style.css">  <!--não utiliza /public/css/style.css por conta da linha 33 no app.js que também está comentada-->
+</head>
+<body>
+    <header>
+        {{> header}} </header>
+
+    <main class="container">
+        {{{body}}} </main>
+
+    <footer>
+        <p>&copy; 2025 E-Commerce. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="/js/cart-ajax.js"></script>  <!--mesma coisa do css-->
+</body>
+</html>

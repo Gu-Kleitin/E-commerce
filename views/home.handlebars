@@ -1,0 +1,17 @@
+<h1>🛒 Produtos em Destaque</h1>
+
+<div class="product-grid">
+  {{#each produtosVisiveis}}
+    <div class="product-card">
+      <img src="{{this.photo}}" alt="{{this.name}}" />
+      <h2>{{this.name}}</h2>
+      <p>{{this.description}}</p>
+      <p class="price">R$ {{this.price}}</p>
+      <button class="button-primary">Comprar</button>
+    </div>
+  {{/each}}
+
+  {{#unless produtosVisiveis}}
+    <p>Nenhum produto está em exposição no momento.</p>
+  {{/unless}}
+</div>

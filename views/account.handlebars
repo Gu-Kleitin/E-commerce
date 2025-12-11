@@ -1,0 +1,19 @@
+<div class="form-card">
+    <h1>Minha Conta</h1>
+
+    <p><strong>Nome:</strong> {{usuario.nome}}</p>
+    <p><strong>Email:</strong> {{usuario.email}}</p>
+    <p><strong>É vendedor?</strong> 
+        {{#if usuario.vendedor}}
+            Sim
+        {{else}}
+            Não
+        {{/if}}
+    </p>
+
+    <br>
+    <form action="/logout" method="POST">
+        <button href="/logout" class="button-danger">Sair</button>
+    </form>
+    
+</div>
