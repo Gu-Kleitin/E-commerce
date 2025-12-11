@@ -1,4 +1,5 @@
 import express from "express";
+<<<<<<< HEAD
 import { engine as exphbs } from "express-handlebars"; // Usando 'engine as exphbs' para importação ESM
 import session from "express-session";
 import cookieParser from "cookie-parser";
@@ -61,3 +62,20 @@ import routes from "./routes.js";
 app.use("/", routes);
 
 export default app; // Usando export default para ser importado em server.js
+=======
+import router from "./routes";
+
+function createApp(){
+    const app = express();
+    app.use(express.json());
+    app.use("/api", router);
+    app.use(cors());
+
+    return app;
+}
+
+export default createApp;
+function cors() {
+    throw new Error("Função não implementada");
+}
+>>>>>>> 467574ff5bebf34fefd06fc0c7316724c82f7c2b

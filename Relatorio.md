@@ -5,7 +5,7 @@ Dependências do Projeto
 Instalação:
 
 ```bash
-npm install express express-handlebars express-session cookie-parser cors
+npm install
 ```
 
 | Dependência          | Finalidade                                                       |
