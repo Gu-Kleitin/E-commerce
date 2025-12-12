@@ -328,6 +328,23 @@ body {
     background-color: #e68a00;
 }
 
+.button-options2 {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.button-options2:hover {
+    background-color: #e68a00;
+}
+
 .button-danger {
     background-color: red;
     color: white;

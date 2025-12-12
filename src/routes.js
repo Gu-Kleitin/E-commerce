@@ -446,6 +446,7 @@ router.get("/cart", requireLogin, (req, res) => {
   res.render("cart", {
     title: "Seu Carrinho",
     cartItemCount: req.session.cart.length,
+    usuario: req.session.usuario,
     cart: cartWithSubtotal,
     total: total,
   });

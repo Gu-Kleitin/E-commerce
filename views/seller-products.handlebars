@@ -24,8 +24,8 @@
       {{#each produtos}}
         <tr>
           <td>{{this.id}}</td>
-          <td>{{this.name}}</td>
-          <td>R$ {{this.price}}</td>
+          <td>{{this.nome}}</td>
+          <td>R$ {{this.preco}}</td>
           <td>
             <form action="/seller/products/stock" method="POST" style="display:inline;">
               <input type="hidden" name="productId" value="{{this.id}}" />
