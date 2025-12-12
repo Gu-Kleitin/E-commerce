@@ -14,18 +14,28 @@
     </div>
 
     {{#if usuario.vendedor}}
+
         <div class="seller-options">
             <h3>Opções de Vendedor</h3>
-            <a href="/seller/products" class="button-primary">Gerenciar Produtos</a>
+
+            <form action="/seller/products" method="get">
+                <button href="/seller/products" class="button-options">Gerenciar Produtos</button>
+            </form>
+            
             <p>Aqui você pode ver e editar seus produtos, estoque e exposição.</p>
         </div>
     {{else}}
-        <div class="client-options">
-            <h3>Opções de Cliente</h3>
-            <a href="/cart" class="button-primary">Ver Carrinho</a>
-            <a href="/orders" class="button-secondary">Meus Pedidos</a>
-            <p>Aqui você pode acompanhar seus pedidos e gerenciar seu carrinho.</p>
+        <h3>Opções de Cliente</h3>
+        <div class="client_options">
+        
+            <form action="/cart" method="get">
+                <button href="/cart" class="button-options">Ver Carrinho</button>
+            </form>
+            <form action="/orders" method="get">
+                <button href="/orders" class="button-options">Meus Pedidos</button>
+            </form>
         </div>
+        <p>Aqui você pode acompanhar seus pedidos e gerenciar seu carrinho.</p>
     {{/if}}
 
     <form action="/logout" method="POST">
