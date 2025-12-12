@@ -1,28 +1,14 @@
-<div class="auth-form-container">
-  <h1>Login de Usuário</h1>
+<div class="form-card">
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+        <label for="email"> Usuário (seu e-mail)</label>
+        <input id="email" type="text" name="email" class="form-control">
 
-  <form action="/login" method="POST" class="auth-form">
+        <label for="senha"> Senha</label>
+        <input id="senha" type="password" name="senha" class="form-control">
 
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" required />
+        <p>Se você não possui cadastro clique <a href="/register">aqui</a></p>
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required />
-
-    <button type="submit" class="button-primary">Entrar</button>
-
-    <p>Ainda não tem conta? <a href="/register">Cadastre-se aqui</a></p>
-  </form>
+        <button id="entrar" type="submit" name="entrar" class="button-submit">Entrar</button>
+    </form>
 </div>
-
-<style>
-  .auth-form-container { max-width: 400px; margin: 50px auto; padding: 30px;
-  background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center; } .auth-form-container h1 { color: var(--secondary-color);
-  margin-bottom: 25px; } .auth-form label { display: block; text-align: left;
-  margin-bottom: 5px; font-weight: bold; } .auth-form input { width: 100%;
-  padding: 10px; margin-bottom: 20px; border: 1px solid var(--border-color);
-  border-radius: 4px; box-sizing: border-box; /* Garante que padding não estoure
-  o width */ } .auth-form button { width: 100%; padding: 12px; margin-top: 10px;
-  }
-</style>

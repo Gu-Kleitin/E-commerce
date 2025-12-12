@@ -8,7 +8,12 @@
     <li><a href="/seller/products">Gestão de Produtos</a></li>
 
     <li><a href="/cart">Carrinho ({{cartItemCount}})</a></li>
-
-    <li><a href="/account">Minha Conta</a></li>
+    
+    <li>{{#if usuario}}
+        <a href="/account">Minha Conta</a>
+      {{else}}
+        <a href="/login">Entrar</a>
+      {{/if}}
+    </li>
   </ul>
 </nav>
