@@ -146,6 +146,11 @@ body {
     color: var(--text-color);
 }
 
+.button-secondary-danger {
+    background-color: #ff0000;
+    color: white;
+}
+
 .button-danger {
     background-color: var(--danger-color);
     color: white;

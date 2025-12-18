@@ -16,6 +16,7 @@
         <th>Nome</th>
         <th>Preço</th>
         <th>Estoque</th>
+        <th>Quantidade</th>
         <th>Status Exposição</th>
         <th>Ações</th>
       </tr>
@@ -27,15 +28,16 @@
           <td>{{this.nome}}</td>
           <td>R$ {{this.preco}}</td>
           <td>
-            <form action="/seller/products/stock" method="POST" style="display:inline;">
+            <form action="/seller/products/stock" method="POST" style="display:inline;" class="action-buttons">
               <input type="hidden" name="productId" value="{{this.id}}" />
               <input type="number" name="quantidade" min="1" required style="width: 50px;">
               <button type="submit" name="action" value="abastecimento" class="button-success">Abastecer</button>
-              <button type="submit" name="action" value="retirada" class="button-danger">Retirar</button>
+              <button type="submit" name="action" value="retirada" class="button-secondary-danger">Retirar</button>
             </form>
           </td>
 
           <td>
+            <span>{{this.stock}}</span>
             {{#if (eq this.estoque 0)}}
               <span class="stock-zero">ESGOTADO</span>
             {{else}}
@@ -66,7 +68,7 @@
 
               {{#if this.emExposicao}}
                 <input type="hidden" name="action" value="retirar" />
-                <button type="submit" class="button-danger">Retirar</button>
+                <button type="submit" class="button-secondary-danger">Retirar</button>
               {{else}}
                 <input type="hidden" name="action" value="expor" />
                 <button type="submit" class="button-success">Expor</button>

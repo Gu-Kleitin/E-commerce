@@ -153,12 +153,12 @@ router.post(
   requireSeller,
   async (req, res) => {
     const { productId, action } = req.body;
-    const id = parseInt(productId);
+    const id = Number(productId);
     const ativo = action === "expor" ? 1 : 0;
 
     try {
       const sql = `UPDATE produto SET ativo = ? WHERE id = ?`;
-      await db.query(sql, [ativo, id]);
+      await db.promise().query(sql, [ativo, id]);
       res.redirect("/seller/products");
     } catch (error) {
       console.error("Erro ao atualizar exposição:", error);
